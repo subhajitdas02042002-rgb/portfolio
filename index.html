@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subhajit Das — System Admin & IT Professional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#081512;
+    --bg-panel:#0e211c;
+    --bg-panel-2:#0b1c17;
+    --line:#1d3a32;
+    --line-soft:#16302a;
+    --gold:#d7a94a;
+    --gold-bright:#f0c46a;
+    --teal:#3fb59a;
+    --teal-soft:#69cdb6;
+    --white:#f4f2ea;
+    --muted:#9db3ac;
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg-deep);
+    color:var(--white);
+    font-family:var(--font-body);
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  img{max-width:100%;display:block;}
+
+  .circuit-bg{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      radial-gradient(ellipse 900px 600px at 85% 8%, rgba(63,181,154,0.12), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 8% 90%, rgba(215,169,74,0.07), transparent 60%);
+  }
+  section{position:relative;z-index:1;}
+
+  .hero-background {
+    background:
+      linear-gradient(100deg, rgba(4,13,18,0.94) 0%, rgba(4,13,18,0.72) 38%, rgba(4,13,18,0.4) 62%, rgba(4,13,18,0.75) 100%),
+      url('hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 5vw;
+    background:rgba(8,21,18,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .logo{display:flex;align-items:center;gap:12px;}
+  .logo-mark{
+    width:38px;height:38px;border-radius:50%;
+    background:conic-gradient(from 200deg, var(--teal), var(--gold), var(--teal));
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+  }
+  .logo-mark svg{position:relative;z-index:1;}
+  .logo-text{
+    font-family:var(--font-display);font-weight:600;letter-spacing:0.12em;
+    font-size:0.95rem;color:var(--gold-bright);text-transform:uppercase;
+  }
+  nav ul{display:flex;gap:38px;}
+  nav a{
+    font-size:0.85rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;
+    color:var(--muted);position:relative;padding-bottom:6px;transition:color .25s;
+  }
+  nav a:hover, nav a.active{color:var(--gold-bright);}
+  nav a.active::after{
+    content:"";position:absolute;left:0;bottom:0;width:100%;height:2px;background:var(--gold);
+  }
+  .hire-btn{
+    background:var(--gold);color:#12241f;font-family:var(--font-display);
+    font-weight:700;font-size:0.82rem;letter-spacing:0.06em;
+    padding:12px 26px;border-radius:6px;transition:all .25s;
+    border:1px solid var(--gold);
+  }
+  .hire-btn:hover{background:transparent;color:var(--gold-bright);}
+  .nav-toggle{display:none;background:none;border:none;color:var(--white);font-size:1.6rem;cursor:pointer;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    display:grid;grid-template-columns:1.05fr 1fr;align-items:center;
+    padding:6vw 5vw 5vw;min-height:88vh;gap:40px;
+  }
+  .eyebrow{
+    font-family:var(--font-display);color:var(--white);font-size:1.4rem;
+    font-weight:600;margin-bottom:4px;
+  }
+  .hero h1{
+    font-family:var(--font-display);font-weight:800;line-height:1.03;
+    font-size:clamp(2.4rem, 5vw, 4.2rem);text-transform:uppercase;
+  }
+  .hero h1 .accent{
+    display:block;
+    background:linear-gradient(100deg, var(--gold) 10%, var(--gold-bright) 50%, var(--gold) 90%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero h1 .line2{color:var(--white);display:block;}
+  .hero p.sub{
+    margin-top:22px;color:var(--muted);font-size:1.06rem;max-width:480px;line-height:1.65;
+  }
+  .hero-ctas{display:flex;gap:16px;margin-top:34px;flex-wrap:wrap;}
+  .btn-solid{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--gold);color:#12241f;font-family:var(--font-display);
+    font-weight:700;font-size:0.85rem;letter-spacing:0.05em;
+    padding:15px 28px;border-radius:6px;transition:transform .2s, box-shadow .2s;
+  }
+  .btn-solid:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(215,169,74,0.25);}
+  .btn-outline{
+    display:inline-flex;align-items:center;gap:10px;
+    border:1px solid var(--line);color:var(--white);font-family:var(--font-display);
+    font-weight:600;font-size:0.85rem;letter-spacing:0.05em;
+    padding:15px 28px;border-radius:6px;transition:all .2s;
+  }
+  .btn-outline:hover{border-color:var(--teal);color:var(--teal-soft);}
+  .socials{display:flex;gap:16px;margin-top:38px;}
+  .socials a{
+    width:40px;height:40px;border:1px solid var(--line);border-radius:8px;
+    display:flex;align-items:center;justify-content:center;color:var(--muted);
+    transition:all .2s;
+  }
+  .socials a:hover{border-color:var(--gold);color:var(--gold-bright);transform:translateY(-2px);}
+
+  /* hero visual */
+  .hero-visual{position:relative;height:560px;display:flex;align-items:flex-end;justify-content:center;}
+  .orbit-ring{
+    position:absolute;border:1px solid var(--line-soft);border-radius:50%;
+    top:38%;left:46%;transform:translate(-50%,-50%);
+  }
+  .orbit-ring.r1{width:480px;height:480px;animation:spin 60s linear infinite;}
+  .orbit-ring.r2{width:340px;height:340px;animation:spin 45s linear infinite reverse;}
+  @keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg);}}
+  .core-lock{
+    position:absolute;top:38%;left:46%;transform:translate(-50%,-50%);
+    width:72px;height:72px;border-radius:50%;
+    background:var(--bg-panel);border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;color:var(--gold-bright);
+    box-shadow:0 0 40px rgba(215,169,74,0.25);
+    animation:pulse 3.5s ease-in-out infinite;
+  }
+  .orbit-node{
+    position:absolute;width:50px;height:50px;border-radius:12px;
+    background:var(--bg-panel);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;color:var(--teal-soft);
+    box-shadow:0 8px 24px rgba(0,0,0,0.35);
+    z-index:1;
+  }
+  .portrait-glow{
+    position:absolute;bottom:0;left:58%;transform:translateX(-50%);
+    width:300px;height:300px;border-radius:50%;
+    background:radial-gradient(circle, rgba(63,181,154,0.26), transparent 70%);
+    filter:blur(10px);
+    animation:pulse 3.5s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:0.7;}
+    50%{opacity:1;}
+  }
+  .portrait-photo{
+    position:relative;z-index:2;
+    max-height:520px;width:auto;
+    object-fit:contain;object-position:bottom;
+    margin-left:80px;
+    -webkit-mask-image:linear-gradient(to bottom, black 88%, transparent 100%);
+    mask-image:linear-gradient(to bottom, black 88%, transparent 100%);
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about{
+    padding:6vw 5vw;border-top:1px solid var(--line-soft);
+    display:grid;grid-template-columns:0.85fr 1.4fr;gap:60px;align-items:start;
+  }
+  .section-label{
+    display:flex;align-items:center;gap:10px;color:var(--gold-bright);
+    font-family:var(--font-mono);font-size:0.85rem;letter-spacing:0.12em;
+    text-transform:uppercase;margin-bottom:18px;
+  }
+  .section-label .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+  .about h2{
+    font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;
+    line-height:1.3;
+  }
+  .about h2 .hl{color:var(--gold-bright);}
+  .about p{color:var(--muted);margin-top:20px;line-height:1.75;font-size:1.02rem;max-width:520px;}
+  .resume-btn{
+    display:inline-flex;align-items:center;gap:10px;margin-top:30px;
+    border:1px solid var(--line);padding:14px 26px;border-radius:6px;
+    font-family:var(--font-display);font-weight:600;font-size:0.85rem;letter-spacing:0.05em;
+    transition:all .2s;
+  }
+  .resume-btn:hover{border-color:var(--teal);color:var(--teal-soft);}
+
+  .service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .service-card{
+    background:var(--bg-panel);border:1px solid var(--line);border-radius:12px;
+    padding:28px 22px;transition:transform .25s, border-color .25s;
+  }
+  .service-card:hover{transform:translateY(-6px);border-color:var(--teal);}
+  .service-card .icon{
+    width:48px;height:48px;border-radius:10px;background:var(--bg-panel-2);
+    display:flex;align-items:center;justify-content:center;color:var(--teal-soft);
+    margin-bottom:18px;
+  }
+  .service-card h3{font-family:var(--font-display);font-size:1.08rem;margin-bottom:10px;}
+  .service-card p{color:var(--muted);font-size:0.92rem;line-height:1.55;}
+
+  /* ---------- STATS ---------- */
+  .stats{
+    grid-column:1/-1;margin-top:10px;
+    border:1px solid var(--line-soft);border-radius:14px;
+    display:grid;grid-template-columns:repeat(4,1fr);
+    background:var(--bg-panel-2);
+  }
+  .stat{
+    display:flex;align-items:center;gap:16px;padding:26px 30px;
+    border-right:1px solid var(--line-soft);
+  }
+  .stat:last-child{border-right:none;}
+  .stat .icon{color:var(--gold-bright);flex-shrink:0;}
+  .stat .num{font-family:var(--font-display);font-weight:700;font-size:1.5rem;}
+  .stat .label{color:var(--muted);font-size:0.82rem;}
+
+  /* ---------- SKILLS ---------- */
+  .skills{padding:6vw 5vw;border-top:1px solid var(--line-soft);}
+  .skills-head{max-width:640px;margin-bottom:50px;}
+  .skills-head h2{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;}
+  .skills-head p{color:var(--muted);margin-top:14px;line-height:1.7;}
+  .skill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .skill-item{
+    background:var(--bg-panel);border:1px solid var(--line);border-radius:12px;padding:26px;
+  }
+  .skill-item h4{font-family:var(--font-display);font-size:1rem;}
+
+  /* ---------- PROJECTS ---------- */
+  .projects{padding:6vw 5vw;border-top:1px solid var(--line-soft);}
+  .project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:50px;}
+  .project-card{
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--bg-panel);
+    transition:transform .25s, border-color .25s;
+  }
+  .project-card:hover{transform:translateY(-6px);border-color:var(--gold);}
+  .project-thumb{
+    height:170px;display:flex;align-items:center;justify-content:center;
+    background:
+      linear-gradient(135deg, rgba(63,181,154,0.15), rgba(215,169,74,0.08)),
+      repeating-linear-gradient(45deg, transparent 0 18px, rgba(255,255,255,0.03) 18px 19px);
+    color:var(--teal-soft);border-bottom:1px solid var(--line);
+  }
+  .project-body{padding:24px;}
+  .project-tag{
+    font-family:var(--font-mono);font-size:0.72rem;color:var(--gold-bright);
+    letter-spacing:0.08em;text-transform:uppercase;
+  }
+  .project-body h3{font-family:var(--font-display);font-size:1.15rem;margin:10px 0 10px;}
+  .project-body p{color:var(--muted);font-size:0.92rem;line-height:1.6;}
+
+  /* ---------- CONTACT ---------- */
+  .contact{padding:6vw 5vw;border-top:1px solid var(--line-soft);}
+  .contact-inner{
+    display:flex;flex-direction:column;align-items:center;text-align:center;
+    border:1px solid var(--line-soft);border-radius:18px;padding:60px;
+    background:var(--bg-panel-2);max-width:640px;margin:0 auto;
+  }
+  .contact-info p{max-width:480px;margin-left:auto;margin-right:auto;}
+  .contact-detail{justify-content:center;}
+  .contact-info .section-label{justify-content:center;}
+  .contact-info h2{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;}
+  .contact-info p{color:var(--muted);margin-top:16px;line-height:1.7;max-width:420px;}
+  .contact-detail{display:flex;align-items:center;gap:16px;margin-top:24px;color:var(--white);}
+  .contact-detail .icon{color:var(--gold-bright);}
+  form{display:flex;flex-direction:column;gap:16px;}
+  form input, form textarea{
+    background:var(--bg-panel);border:1px solid var(--line);border-radius:8px;
+    padding:14px 16px;color:var(--white);font-family:var(--font-body);font-size:0.95rem;
+    outline:none;transition:border-color .2s;
+  }
+  form input:focus, form textarea:focus{border-color:var(--teal);}
+  form textarea{resize:vertical;min-height:120px;}
+  form button{
+    margin-top:6px;background:var(--gold);color:#12241f;border:none;border-radius:8px;
+    padding:16px;font-family:var(--font-display);font-weight:700;letter-spacing:0.04em;
+    cursor:pointer;transition:opacity .2s;
+  }
+  form button:hover{opacity:0.88;}
+
+  footer{
+    padding:30px 5vw;border-top:1px solid var(--line-soft);
+    display:flex;justify-content:space-between;align-items:center;color:var(--muted);
+    font-size:0.85rem;
+  }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+    outline:2px solid var(--teal-soft);outline-offset:2px;
+  }
+
+  @media (max-width:1000px){
+    .hero{grid-template-columns:1fr;}
+    .hero-visual{height:340px;order:-1;}
+    .portrait-photo{margin-left:0;max-height:320px;}
+    .about{grid-template-columns:1fr;}
+    .service-grid{grid-template-columns:repeat(2,1fr);}
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .stat{border-right:none;border-bottom:1px solid var(--line-soft);}
+    .skill-grid{grid-template-columns:repeat(2,1fr);}
+    .project-grid{grid-template-columns:repeat(2,1fr);}
+    .contact-inner{padding:36px;}
+    nav ul{display:none;}
+    .nav-toggle{display:block;}
+  }
+  @media (max-width:640px){
+    .service-grid, .skill-grid, .project-grid{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .orbit-ring, .core-lock{animation:none;}
+    .project-card, .service-card{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="circuit-bg"></div>
+
+<header>
+  <div class="logo">
+    <div class="logo-mark">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0e211c" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a13 13 0 0 1 0 18M12 3a13 13 0 0 0 0 18"/></svg>
+    </div>
+    <span class="logo-text">Subhajit Das</span>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <a href="#contact" class="hire-btn">Hire Me</a>
+</header>
+
+<section class="hero hero-background" id="home">
+  <div class="hero-copy">
+    <div class="eyebrow">I'M</div>
+    <h1>
+      <span class="accent">System Admin</span>
+      <span class="line2">IT Professional</span>
+    </h1>
+    <p class="sub">Server Administrator | Cybersecurity Enthusiast | Network Engineer
+Passionate about securing IT infrastructure, managing enterprise servers, and building reliable network solutions.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-solid">Hire Me
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a href="#projects" class="btn-outline">View My Work
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+      </a>
+    </div>
+    <div class="socials">
+      <a href="https://www.linkedin.com/in/subhajit-das79b35418a" aria-label="LinkedIn" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+      </a>
+      <a href="tel:+916297256017" aria-label="Phone">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </a>
+      <a href="mailto:subhajitdas02042002@gmail.com" aria-label="Email">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="orbit-ring r1"></div>
+    <div class="orbit-ring r2"></div>
+    <div class="core-lock">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M12 12v9M9 17h3M9 20h3"/></svg>
+    </div>
+    <div class="portrait-glow"></div>
+    <img class="portrait-photo" src="portrait.jpg" alt="Portrait of Subhajit Das">
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div>
+    <div class="section-label"><span class="dot"></span>About Me</div>
+    <h2>Hello, I'm an <span class="hl">IT Professional</span></h2>
+    <p>I specialize in System Administration, Server Management, Network Security, and Cloud Infrastructure. With hands-on experience managing enterprise systems at ARKCA Corporate Solutions and Jetking, I ensure reliability, performance, and security for the organizations I work with.</p>
+    <a href="SUBHAJIT_DAS_Resume.pdf" class="resume-btn" download>Download Resume
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+    </a>
+  </div>
+
+  <div class="service-grid" id="services">
+    <div class="service-card">
+      <div class="icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="14" width="20" height="7" rx="1.5"/><rect x="2" y="3" width="20" height="7" rx="1.5"/><circle cx="6" cy="6.5" r="0.8" fill="currentColor"/><circle cx="6" cy="17.5" r="0.8" fill="currentColor"/></svg>
+      </div>
+      <h3>System Administration</h3>
+      <p>Manage and maintain servers, users, and enterprise systems.</p>
+    </div>
+    <div class="service-card">
+      <div class="icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+      </div>
+      <h3>Network Security</h3>
+      <p>Implement security policies and protect networks from threats.</p>
+    </div>
+    <div class="service-card">
+      <div class="icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 10a5 5 0 0 0-9.6-2A4 4 0 0 0 6 16h11a3.5 3.5 0 0 0 1-6.9z"/></svg>
+      </div>
+      <h3>Cloud Infrastructure</h3>
+      <p>Deploy, manage, and optimize cloud environments.</p>
+    </div>
+    <div class="service-card">
+      <div class="icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg>
+      </div>
+      <h3>IT Support</h3>
+      <p>Provide technical support and ensure smooth IT operations.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <svg class="icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        <div><div class="num">M.Sc</div><div class="label">in Advanced Networking &amp; Cyber Security</div></div>
+      </div>
+      <div class="stat">
+        <svg class="icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        <div><div class="num">2</div><div class="label">Organizations Served</div></div>
+      </div>
+      <div class="stat">
+        <svg class="icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        <div><div class="num">ISOEH</div><div class="label">Cyber Security Certified</div></div>
+      </div>
+      <div class="stat">
+        <svg class="icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        <div><div class="num">AZ-104</div><div class="label">Microsoft Azure Administrator</div></div>
+      </div>
+      <div class="stat">
+        <svg class="icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <div><div class="num">Kolkata</div><div class="label">Based in New Town</div></div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<section class="skills" id="skills">
+  <div class="skills-head">
+    <div class="section-label"><span class="dot"></span>Skills</div>
+    <h2>Tools &amp; technologies I rely on</h2>
+    <p>Technical skills built through system administration, training, and hands-on cyber security work.</p>
+  </div>
+  <div class="skill-grid">
+    <div class="skill-item"><h4 style="margin-bottom:10px;">Operating Systems</h4><p style="color:var(--muted);font-size:0.9rem;line-height:1.6;">Windows Server 2016/2019/2022, Windows 10/11, Linux (Ubuntu, RHEL)</p></div>
+    <div class="skill-item"><h4 style="margin-bottom:10px;">Virtualization</h4><p style="color:var(--muted);font-size:0.9rem;line-height:1.6;">VMware, Hyper-V</p></div>
+    <div class="skill-item"><h4 style="margin-bottom:10px;">System Administration</h4><p style="color:var(--muted);font-size:0.9rem;line-height:1.6;">ADDS, user &amp; group management, SAN, file servers, backup &amp; recovery</p></div>
+    <div class="skill-item"><h4 style="margin-bottom:10px;">Networking</h4><p style="color:var(--muted);font-size:0.9rem;line-height:1.6;">TCP/IP model, proxy &amp; VPN, VLAN, switching &amp; routing, troubleshooting</p></div>
+    <div class="skill-item"><h4 style="margin-bottom:10px;">Cloud</h4><p style="color:var(--muted);font-size:0.9rem;line-height:1.6;">Infrastructure &amp; management on AWS and Azure</p></div>
+    <div class="skill-item"><h4 style="margin-bottom:10px;">Security Tools</h4><p style="color:var(--muted);font-size:0.9rem;line-height:1.6;">Wireshark, Nmap, Metasploit, Snort</p></div>
+  </div>
+</section>
+
+<section class="projects" id="projects">
+  <div class="skills-head">
+    <div class="section-label"><span class="dot"></span>Experience &amp; Projects</div>
+    <h2>Where I've worked</h2>
+    <p>Professional experience, hands-on projects, and academic background.</p>
+  </div>
+  <div class="project-grid">
+    <div class="project-card">
+      <div class="project-thumb">
+        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="14" width="20" height="7" rx="1.5"/><rect x="2" y="3" width="20" height="7" rx="1.5"/></svg>
+      </div>
+      <div class="project-body">
+        <span class="project-tag">Current Role</span>
+        <h3>Server Administrator</h3>
+        <p>Currently working as a Server Administrator at ARKCA Corporate Solutions Pvt. Ltd., handling day-to-day IT administration and system maintenance.</p>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-thumb">
+        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+      </div>
+      <div class="project-body">
+        <span class="project-tag">Prior Role</span>
+        <h3>Assistant IT Admin cum Technical Trainer</h3>
+        <p>At Jetking, Bhubaneswar — supported Active Directory user management, GPO tasks, and managed lab systems, OS installation, updates &amp; backups.</p>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-thumb">
+        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M18 10a5 5 0 0 0-9.6-2A4 4 0 0 0 6 16h11a3.5 3.5 0 0 0 1-6.9z"/></svg>
+      </div>
+      <div class="project-body">
+        <span class="project-tag">Project</span>
+        <h3>Advanced Office Administration</h3>
+        <p>Built using Bash, Python, and Ansible to automate and streamline office IT administration tasks.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="skill-grid" style="margin-top:26px;">
+    <div class="skill-item">
+      <h4 style="margin-bottom:10px;">Academic Background</h4>
+      <p style="color:var(--muted);font-size:0.9rem;line-height:1.6;">M.Sc in Advanced Networking &amp; Cyber Security, Brainware University (2025)<br>B.Sc (H) in Advanced Networking &amp; Cyber Security, Brainware University (2023)</p>
+    </div>
+    <div class="skill-item">
+      <h4 style="margin-bottom:10px;">Certification &amp; Training</h4>
+      <p style="color:var(--muted);font-size:0.9rem;line-height:1.6;">Cyber Security &amp; Ethical Hacking training from the Indian School of Ethical Hacking (I.S.O.E.H), July 2024</p>
+    </div>
+    <div class="skill-item">
+      <h4 style="margin-bottom:10px;">Beyond Work</h4>
+      <p style="color:var(--muted);font-size:0.9rem;line-height:1.6;">Enjoys watching cricket and exploring new technologies</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div class="section-label"><span class="dot"></span>Contact</div>
+      <h2>Let's Connect</h2>
+      <p>Thank you for visiting my portfolio. I'm always happy to connect with fellow IT professionals, recruiters, and anyone interested in Server Administration, Cybersecurity, or Networking. Feel free to reach out if you'd like to discuss opportunities, collaborate, or simply have a conversation about technology.</p>
+      <div class="contact-detail">
+        <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
+        subhajitdas02042002@gmail.com
+      </div>
+      <div class="contact-detail">
+        <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +91 6297256017
+      </div>
+      <div class="contact-detail">
+        <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        New Town, Kolkata, West Bengal
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Subhajit Das. All rights reserved.</span>
+  <span>Server Administration • Network Security • Cyber Security</span>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      const top = s.offsetTop - 120;
+      if (window.scrollY >= top) current = s.getAttribute('id');
+    });
+    navLinks.forEach(l => {
+      l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+
+</body>
+</html>
